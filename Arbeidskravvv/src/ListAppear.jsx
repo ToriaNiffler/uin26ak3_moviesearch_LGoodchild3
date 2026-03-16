@@ -26,7 +26,7 @@ function ListAppear({apiKey}) {
 		const loadBondMovies = async () => {
 			try {
 				const movieResponses = await Promise.all(
-					bondMovieIds.map((id) => fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`))
+					bondMovieIds.map((id) => fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`)) //og til å få denne api key delen til å funke 
 				);
 
 				const movieThing = await Promise.all(movieResponses.map((gets) => gets.json()));

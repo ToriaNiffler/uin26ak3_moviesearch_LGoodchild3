@@ -1,11 +1,12 @@
 import {useState} from 'react'
 import {Link, Route, Routes} from 'react-router-dom'
 import './App.css'
+
 import ListAppear from './ListAppear'
 import FilmPicked from './FilmPicked'
 
 function SlayMovieTitle(title) {
-  return title.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
+  return title.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-'); //fikk hjelp av ai til å bygge denne funksjonen siden jeg sleit en del 
 }
 
 function Page() {
@@ -13,7 +14,6 @@ function Page() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [showBondList, setShowBondList] = useState(true);
-  const [loading, setLoading] = useState(false);
 
   const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 
@@ -22,9 +22,7 @@ function Page() {
     event.preventDefault();
     setShowBondList(false);
 
-    setLoading(true);
-
-    const API_URL = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${encodeURIComponent (query)}`;
+    const API_URL = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${encodeURIComponent (query)}`; //fikk hjelp av ai tii å bygge denne url-en rund api keyen og litt hjelp med å sørge for at det funka. github copiolot
 
 
     try {
@@ -64,14 +62,15 @@ function Page() {
         <button type="submit">Søk</button>
 
       </form>
+      
       {showBondList && (
 
         <>
-          <ListAppear apiKey={API_KEY} />
+          <ListAppear apiKey={API_KEY}/>
         </>
 
       )}
-      {loading && <p>Loadese</p>}
+
 
       <ul>
 
@@ -85,9 +84,7 @@ function Page() {
             >
               <strong>{movie.Title}</strong>
 
-            </Link>{' '}''
-
-            {movie.Poster !== 'N/A' && <img src={movie.Poster}/>}
+            </Link>{' '}''{movie.Poster !== 'N/A' && <img src={movie.Poster}/>}
 
           </li>
 
@@ -105,7 +102,7 @@ function App() {
       <Route path="/" element={<Page/>}/>
       <Route path="/:movie" element={<FilmPicked/>}/>
 
-    </Routes>
+    </Routes> //fikk litt hjelp av ai med rautes også, siden den fårslo noe her mens jeg gjorde det, og det funka så jeg beholdt det
 
   );
 }

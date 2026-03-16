@@ -1,6 +1,7 @@
 import {Link, useLocation, useParams} from 'react-router-dom';
 
 function ToTitle(slay = '') {
+	
 	return slay
 		.split('-')
 		.filter(Boolean)
