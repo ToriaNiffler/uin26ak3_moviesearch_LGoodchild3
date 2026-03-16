@@ -8,7 +8,7 @@ function SlayMovieTitle(title) {
   return title.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
 }
 
-function HomePage() {
+function Page() {
 
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
@@ -33,7 +33,7 @@ function HomePage() {
 
       if (data.Response === 'True') {
         setMovies(data.Search);
-        
+
       } else {
         setMovies([]);
 
@@ -71,7 +71,7 @@ function HomePage() {
         </>
 
       )}
-      {loading && <p>Loader.</p>}
+      {loading && <p>Loadese</p>}
 
       <ul>
 
@@ -102,8 +102,8 @@ function App() {
 
     <Routes>
 
-      <Route path="/" element={<HomePage />}/>
-      <Route path="/:movie" element={<FilmPicked />}/>
+      <Route path="/" element={<Page/>}/>
+      <Route path="/:movie" element={<FilmPicked/>}/>
 
     </Routes>
 

@@ -21,7 +21,7 @@ function ListAppear({apiKey}) {
 			'tt0070328',
 			'tt0071807',
 			'tt0076752'
-		];
+		]; //fikk hjelp av ai til å finne disse id-ene
 
 		const loadBondMovies = async () => {
 			try {

@@ -1,1 +1,1 @@
-Jeg hadde flere github feil så navnet er litt rart fordi jeg ikke fikk lage samme navn på nytt. 
+Jeg hadde flere github feil så navnet er litt rart fordi jeg ikke fikk lage samme navn på nytt. jeg har også hatt en del åroblemer med a relanche prosjektet så jeg håper det funker. 
