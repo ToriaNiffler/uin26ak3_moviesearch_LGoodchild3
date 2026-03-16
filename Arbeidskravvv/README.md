@@ -1,0 +1,1 @@
+Jeg hadde flere github feil så navnet er litt rart fordi jeg ikke fikk lage samme navn på nytt. 
