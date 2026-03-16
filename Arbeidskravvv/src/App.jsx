@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link, Route, Routes } from 'react-router-dom'
+import {useState} from 'react'
+import {Link, Route, Routes} from 'react-router-dom'
 import './App.css'
 import ListAppear from './ListAppear'
 import FilmPicked from './FilmPicked'
@@ -9,6 +9,7 @@ function SlayMovieTitle(title) {
 }
 
 function HomePage() {
+
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [showBondList, setShowBondList] = useState(true);
@@ -27,11 +28,12 @@ function HomePage() {
 
 
     try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
+      const gets = await fetch(API_URL);
+      const data = await gets.json();
 
       if (data.Response === 'True') {
         setMovies(data.Search);
+        
       } else {
         setMovies([]);
 
@@ -45,42 +47,48 @@ function HomePage() {
   };
 
   return (
+
     <section className="App">
 
       <h1>Movie Search</h1>
 
       <form onSubmit={Search}>
+
         <input
           type="text"
           value={query}
-          onChange={e => setQuery(e.target.value)}
+          onChange={Event => setQuery(Event.target.value)}
           placeholder="Søk etter film her"
         />
 
-        <button type="submit">Search</button>
+        <button type="submit">Søk</button>
 
       </form>
       {showBondList && (
+
         <>
-          <h2>James Bond Movies</h2>
           <ListAppear apiKey={API_KEY} />
         </>
+
       )}
       {loading && <p>Loader.</p>}
 
-      <ul style={{listStyle:'none',padding:0}}>
+      <ul>
 
         {movies.map(movie => (
 
           <li key={movie.imdbID}>
+
             <Link
               to={`/${SlayMovieTitle(movie.Title)}`}
               state={{ movie }}
             >
               <strong>{movie.Title}</strong>
-            </Link>{' '}
-            ({movie.Year})
-            {movie.Poster !== 'N/A' && <img src={movie.Poster} alt={movie.Title} />}
+
+            </Link>{' '}''
+
+            {movie.Poster !== 'N/A' && <img src={movie.Poster}/>}
+
           </li>
 
         ))}
@@ -91,10 +99,14 @@ function HomePage() {
 
 function App() {
   return (
+
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/:movie" element={<FilmPicked />} />
+
+      <Route path="/" element={<HomePage />}/>
+      <Route path="/:movie" element={<FilmPicked />}/>
+
     </Routes>
+
   );
 }
 

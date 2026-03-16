@@ -1,7 +1,7 @@
-import { Link, useLocation, useParams } from 'react-router-dom';
+import {Link, useLocation, useParams} from 'react-router-dom';
 
-function slugToTitle(slug = '') {
-	return slug
+function ToTitle(slay = '') {
+	return slay
 		.split('-')
 		.filter(Boolean)
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -9,23 +9,28 @@ function slugToTitle(slug = '') {
 }
 
 function FilmPicked() {
-	const { movie } = useParams();
+
+	const {movie} = useParams();
 	const location = useLocation();
+
 	const pickedMovie = location.state?.movie;
 
-	const titleFromSlug = slugToTitle(movie);
-	const pageTitle = pickedMovie?.Title || titleFromSlug || 'Film';
+	const titleFrom = ToTitle(movie);
+	const pageTitle = pickedMovie?.Title || titleFrom || 'Film';
 
 	return (
 		<section className="App">
+
 			<h1>{pageTitle}</h1>
-			{pickedMovie?.Year && <p>Year: {pickedMovie.Year}</p>}
+
 			{pickedMovie?.Poster && pickedMovie.Poster !== 'N/A' && (
-				<img src={pickedMovie.Poster} alt={pageTitle} />
+				<img src={pickedMovie.Poster}/>
 			)}
+
 			<p>
-				<Link to="/">Tilbake til forsiden</Link>
+				<Link to="/">forsiden</Link>
 			</p>
+
 		</section>
 	);
 }

@@ -1,18 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 
-function slugifyMovieTitle(title) {
+function slayMovieTitle(title) {
 	return title.toLowerCase().trim().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
 }
 
-function ListAppear({ apiKey, onError }) {
+function ListAppear({apiKey}) {
 	const [movies, setMovies] = useState([]);
 
 	useEffect(() => {
-		if (!apiKey) {
-			onError?.('Missing OMDB API key. Add VITE_OMDB_API_KEY to .env.local and restart the dev server.');
-			return;
-		}
 
 		const bondMovieIds = [
 			'tt0055928',
@@ -33,24 +29,25 @@ function ListAppear({ apiKey, onError }) {
 					bondMovieIds.map((id) => fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`))
 				);
 
-				const movieData = await Promise.all(movieResponses.map((res) => res.json()));
-				const validMovies = movieData
+				const movieThing = await Promise.all(movieResponses.map((gets) => gets.json()));
+				const validMovies = movieThing
+
 					.filter((movie) => movie.Response === 'True')
+					
 					.map((movie) => ({
 						imdbID: movie.imdbID,
 						Title: movie.Title,
-						Year: movie.Year,
 						Poster: movie.Poster
 					}));
 
 				setMovies(validMovies);
 			} catch (err) {
-				onError?.('Could not load James Bond movies on startup.');
+		
 			}
 		};
 
 		loadBondMovies();
-	}, [apiKey, onError]);
+	}, [apiKey]);
 
 	if (!movies.length) {
 		return null;
@@ -59,13 +56,17 @@ function ListAppear({ apiKey, onError }) {
 	return (
 		<ul>
 			{movies.map((movie) => (
+
 				<li key={movie.imdbID}>
-					<Link to={`/${slugifyMovieTitle(movie.Title)}`} state={{ movie }}>
+
+					<Link to={`/${slayMovieTitle(movie.Title)}`} state={{movie}}>
+
 						<strong>{movie.Title}</strong>
-					</Link>{' '}
-					({movie.Year})
-					<br />
-					{movie.Poster !== 'N/A' && <img src={movie.Poster} alt={movie.Title} />}
+						
+					</Link>{' '}''
+
+					{movie.Poster !== 'N/A' && <img src={movie.Poster}/>}
+
 				</li>
 			))}
 		</ul>
