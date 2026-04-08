@@ -83,8 +83,9 @@ function Page() {
               state={{ movie }}
             >
               <strong>{movie.Title}</strong>
+              <p>{movie.Year}</p>
 
-            </Link>{' '}''{movie.Poster !== 'N/A' && <img src={movie.Poster}/>}
+            </Link>{movie.Poster !== 'N/A' && <img src={movie.Poster}/>}
 
           </li>
 
@@ -100,6 +101,7 @@ function App() {
     <Routes>
 
       <Route path="/" element={<Page/>}/>
+      
       <Route path="/:movie" element={<FilmPicked/>}/>
 
     </Routes> //fikk litt hjelp av ai med rautes også, siden den fårslo noe her mens jeg gjorde det, og det funka så jeg beholdt det

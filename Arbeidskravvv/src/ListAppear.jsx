@@ -10,39 +10,20 @@ function ListAppear({apiKey}) {
 
 	useEffect(() => {
 
-		const bondMovieIds = [
-			'tt0055928',
-			'tt0057076',
-			'tt0058150',
-			'tt0059800',
-			'tt0062512',
-			'tt0064757',
-			'tt0066995',
-			'tt0070328',
-			'tt0071807',
-			'tt0076752'
-		]; //fikk hjelp av ai til å finne disse id-ene
-
 		const loadBondMovies = async () => {
 			try {
-				const movieResponses = await Promise.all(
-					bondMovieIds.map((id) => fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${id}`)) //og til å få denne api key delen til å funke 
+				const response = await fetch(
+					`https://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent('James Bond')}`
 				);
+				const data = await response.json();
 
-				const movieThing = await Promise.all(movieResponses.map((gets) => gets.json()));
-				const validMovies = movieThing
-
-					.filter((movie) => movie.Response === 'True')
-					
-					.map((movie) => ({
-						imdbID: movie.imdbID,
-						Title: movie.Title,
-						Poster: movie.Poster
-					}));
-
-				setMovies(validMovies);
+				if (data.Response === 'True') {
+					setMovies(data.Search);
+				} else {
+					setMovies([]);
+				}
 			} catch (err) {
-		
+				setMovies([]);
 			}
 		};
 
@@ -62,6 +43,7 @@ function ListAppear({apiKey}) {
 					<Link to={`/${slayMovieTitle(movie.Title)}`} state={{movie}}>
 
 						<strong>{movie.Title}</strong>
+						<p>{movie.Year}</p>
 						
 					</Link>{' '}''
 
